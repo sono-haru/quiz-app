@@ -1,0 +1,80 @@
+[
+    {
+        "subject": "HTML",
+        "level": 1,
+        "items": [
+            {
+                "question": "<ul>の中に<li>を入れるような構造を【入れ子構造】と呼ぶ。",
+                "answer": true
+            },
+            {
+                "question": "<h5>タグは最も小さい見出しを作成するタグである。",
+                "answer": false
+            },
+            {
+                "question": "<img>タグには必ずalt属性を設定しなければならない。",
+                "answer": true
+            },
+            {
+                "question": "<ul>タグは順番付きリストを作成するために使用する。",
+                "answer": false
+            },
+            {
+                "question": "<table>タグは表を作成するために使用される。",
+                "answer": true
+            }
+        ]
+    },
+    {
+        "subject": "HTML",
+        "level": 2,
+        "items": [
+            {
+                "question": "<input type=\"radio\"> は複数の選択肢から1つだけ選ぶために使用される。",
+                "answer": true
+            },
+            {
+                "question": "<button>タグにtype=\"submit\"を指定すると、フォームの送信ボタンとして動作する。",
+                "answer": true
+            },
+            {
+                "question": "<meta>タグはページ内のリンクを定義するために使用される。",
+                "answer": false
+            },
+            {
+                "question": "<form>タグはユーザーからの入力を受け付けるために使用される。",
+                "answer": true
+            },
+            {
+                "question": "<audio>タグを使用すると、動画をページ内に埋め込むことができる。",
+                "answer": false
+            }
+        ]
+    },
+    {
+        "subject": "HTML",
+        "level": 3,
+        "items": [
+            {
+                "question": "<input type=\"checkbox\">は1つの選択肢のみ選べるようにするためのフィールドである。",
+                "answer": false
+            },
+            {
+                "question": "<input type=\"number\">タグでは負の数を入力することはできない。",
+                "answer": false
+            },
+            {
+                "question": "<head>タグ内で<style>タグを使ってCSSを記述すると、そのスタイルはページ全体に適用される。",
+                "answer": true
+            },
+            {
+                "question": "<picture>タグは、異なるデバイスや画面サイズに合わせて画像を変更するために使う。",
+                "answer": true
+            },
+            {
+                "question": "<meta charset=\"UTF-8\">タグは、<html>タグの前に配置する必要がある。",
+                "answer": false
+            }
+        ]
+    }
+]
