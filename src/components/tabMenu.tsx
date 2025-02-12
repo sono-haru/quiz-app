@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const TabMenu = ({ }: any) => {
     return (
-        <div className="h-[90px] flex gap-16 justify-center items-end bg-[#FEE5E5] border-t-4 border-t-white">
+        <div className="h-[90px] flex gap-16 justify-center items-end bg-[#FEE5E5] border-t-[6px] border-t-white">
             <Link href="/">
                 <Image
                     src="/button-home.png"

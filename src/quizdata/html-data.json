@@ -9,7 +9,8 @@
             },
             {
                 "question": "<h5>タグは最も小さい見出しを作成するタグである。",
-                "answer": false
+                "answer": false,
+                "correctAnswer": "<h6>タグが最も小さい見出しを作成するタグです。"
             },
             {
                 "question": "<img>タグには必ずalt属性を設定しなければならない。",
@@ -17,7 +18,8 @@
             },
             {
                 "question": "<ul>タグは順番付きリストを作成するために使用する。",
-                "answer": false
+                "answer": false,
+                "correctAnswer": "<ul>タグは順番なしリストを作成するために使用します。順番付きリストには<ol>タグを使用します。"
             },
             {
                 "question": "<table>タグは表を作成するために使用される。",
@@ -39,7 +41,8 @@
             },
             {
                 "question": "<meta>タグはページ内のリンクを定義するために使用される。",
-                "answer": false
+                "answer": false,
+                "correctAnswer": "<meta>タグはページのメタ情報を設定するために使用します。リンクの定義には<a>タグを使用します。"
             },
             {
                 "question": "<form>タグはユーザーからの入力を受け付けるために使用される。",
@@ -47,7 +50,8 @@
             },
             {
                 "question": "<audio>タグを使用すると、動画をページ内に埋め込むことができる。",
-                "answer": false
+                "answer": false,
+                "correctAnswer": "<audio>タグは音声を埋め込むために使用し、動画を埋め込むには<video>タグを使用します。"
             }
         ]
     },
@@ -57,11 +61,13 @@
         "items": [
             {
                 "question": "<input type=\"checkbox\">は1つの選択肢のみ選べるようにするためのフィールドである。",
-                "answer": false
+                "answer": false,
+                "correctAnswer": "<input type=\"radio\">を使用すると、1つの選択肢のみを選べるようにできます。"
             },
             {
                 "question": "<input type=\"number\">タグでは負の数を入力することはできない。",
-                "answer": false
+                "answer": false,
+                "correctAnswer": "`min` 属性を指定しない限り負の数も入力できます。"
             },
             {
                 "question": "<head>タグ内で<style>タグを使ってCSSを記述すると、そのスタイルはページ全体に適用される。",
@@ -73,7 +79,8 @@
             },
             {
                 "question": "<meta charset=\"UTF-8\">タグは、<html>タグの前に配置する必要がある。",
-                "answer": false
+                "answer": false,
+                "correctAnswer": "<head>タグ内に記述する必要があります。"
             }
         ]
     }

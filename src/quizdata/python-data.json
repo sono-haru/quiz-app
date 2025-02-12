@@ -4,7 +4,7 @@
         "level": 1,
         "items": [
             {
-                "question": "pythonをキーボードが平仮名のままで入力すると「ｐｙちょｎ」になる。",
+                "question": "キーボードが平仮名のままでpythonと入力すると「ｐｙちょｎ」と入力される。",
                 "answer": false
             },
             {
@@ -57,7 +57,7 @@
         "items": [
             {
                 "question": "リストの要素を削除するためのメソッドは「delete()」である。",
-                "answer":false
+                "answer": false
             },
             {
                 "question": "辞書の値にアクセスするために使用する方法は「dict[key]」である。",
@@ -77,6 +77,4 @@
             }
         ]
     }
-    
-
 ]

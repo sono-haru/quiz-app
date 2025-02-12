@@ -12,7 +12,7 @@ export const Subject = ({ subject, subjectColor, subjectSlug1, subjectSlug2, sub
                     </p>
                 </div>
 
-                <div className="mb-[3px] flex flex-col w-full px-3 pt-1 pb-2 gap-2">
+                <div className="mb-[3px] flex flex-col w-full px-8 pt-3 pb-2 gap-3">
                     <Link href={`/quiz/${subjectSlug1}`} className="block">
                         <div className="bg-[#dfdfdf] rounded px-2 py-2 text-center text-sm">
                             難易度 ★☆☆
@@ -28,39 +28,7 @@ export const Subject = ({ subject, subjectColor, subjectSlug1, subjectSlug2, sub
                             難易度 ★★★
                         </div>
                     </Link>
-                    {/* <Link href={`/quiz/${subjectSlug1}`}>
-<Image src="/level-1.jpg"
-width={300}
-height={40}
-className="rounded my-3 opacity-80 h-[40px] transition-all duration-200 ease-in active:scale-[0.98]"
-alt="難易度1"
-/>
-</Link>
-
-{/* <Link href={`/quiz/${subjectSlug2}`}>
-<Image src="/level-2.jpg"
-width={300}
-height={40}
-className="rounded my-3 opacity-80 h-[40px] transition-all duration-200 ease-in active:scale-[0.98]"
-alt="難易度2"
-/>
-</Link>
-
-<Link href={`/quiz/${subjectSlug3}`}>
-<Image src="/level-3.jpg"
-width={300}
-height={40}
-className="rounded my-3 opacity-80 h-[40px] transition-all duration-200 ease-in active:scale-[0.98]"
-alt="難易度3"
-/>
-</Link> */}
-
                 </div>
-
-                <div>
-
-                </div>
-
             </div>
         </>
     )

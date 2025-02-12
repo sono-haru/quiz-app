@@ -5,6 +5,14 @@
     "typescript.preferences.quoteStyle": "double",
     "cSpell.words": [
         "kaisei",
+        "quizdata",
         "turbopack"
     ],
+    "eslint.format.enable": true,
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    }
 }
