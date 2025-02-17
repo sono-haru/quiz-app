@@ -3,55 +3,47 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 
-
 export default function LogIn() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!username || !password) {
+            setError("ユーザーネームとパスワードを入力してください");
+            return;
+        }
+
+        setError(null);
+
+        // サインイン処理
         const res = await signIn("credentials", {
-            username, password
+            username, password,
+            redirect: false,
         });
 
+        // エラー処理
         if (res?.error) {
-            setError(res.error);
+            switch (res.error) {
+                case "CredentialsSignin":
+                    setError("ユーザーネームまたはパスワードが間違っています");
+                    break;
+                default:
+                    setError(`認証エラーが発生しました (${res.error})`);
+                    break;
+            }
+
+            return;
         }
 
+        // ログインが成功した場合はトップページにリダイレクト
         if (res?.ok) {
             router.push("/");
+            return;
         }
-
-        // // awaitを用いることでresponseを取得するまで処理を停止させる
-        // const response = await fetch("/api/login", {
-        //     method: "POST",
-
-        //     // リクエストのbodyに含まれるデータがJSON形式であることを示す
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-
-        //     // JSON形式の文字列に変換
-        //     body: JSON.stringify({ username, password }),
-        // });
-
-        // // ログイン成功した場合
-        // if (response.ok) {
-        //     alert("ログイン成功");
-        //     // setIsAuthenticated(true);
-        //     localStorage.setItem("isAuthenticated", "true");
-
-        //     //indexページに遷移
-        //     router.push("/");
-
-        // } else {
-        //     // ログイン失敗
-        //     const errorMessage = await response.json();
-        //     setError(errorMessage.message);
-        // }
     };
 
     return (
@@ -72,7 +64,7 @@ export default function LogIn() {
                 <input
                     type="text"
                     id="nickname"
-                    className="rounded-md bg-[#FFFFFF] w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1]"
+                    className="rounded-md bg-[#FFFFFF] text-gray-700 w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1]"
                     placeholder="ユーザーネームを入力"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -85,14 +77,14 @@ export default function LogIn() {
                 <input
                     type="password"
                     id="password"
-                    className="rounded-md bg-[#FFFFFF] w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1]"
+                    className="rounded-md bg-[#FFFFFF] text-gray-700 w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1]"
                     placeholder="パスワードを入力"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
                 {/* エラーメッセージ */}
-                {error && <p className="text-red-500 mt-2">{error}</p>}
+                {error ? <p className="text-red-500 mt-2">{error}</p> : null}
 
                 <div className="flex flex-col items-center">
                     <button type="submit" className="w-[150px] block mt-[40px]">
@@ -110,7 +102,6 @@ export default function LogIn() {
                     </div>
                 </div>
             </form>
-            {/* {isAuthenticated && <p>ログインしています！</p>} */}
         </div>
     );
 }

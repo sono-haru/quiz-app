@@ -2,18 +2,18 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Layout } from "@/components/layout";
 import { Subject } from "@/components/subject";
-// import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
     const router = useRouter();
+    const { status } = useSession();
+
     useEffect(() => {
-        //認証状態を確認
-        const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-        if (!isAuthenticated) {
-            // ログインしていない場合はサインアップページにリダイレクト
+        //認証状態を確認し、ログインしていない場合はサインアップページにリダイレクト
+        if (status === "unauthenticated") {
             router.push("/signup");
         }
-    }, [router]); // routerが変更された時に再実行される
+    }, [router, status]); // routerが変更された時に再実行される
 
 
     return (

@@ -12,13 +12,13 @@ type Props = {
 export const Layout = ({ children, headerImgSrc, noHeader }: Props) => {
     return (
         <div className="relative flex flex-col h-screen max-w-auto">
-            {noHeader || (
+            {noHeader || !headerImgSrc || (
                 <header className="aspect-[44/21] border-b-[6px] border-t-[6px] border-white">
-                    <img src={headerImgSrc} className="w-full h-full" />
+                    <img alt="Header Image" src={headerImgSrc} className="w-full h-full" />
                     {/* <Link href="/"><span>quiz-app</span></Link> */}
                 </header>
             )}
-            <main className="relative flex-1 overflow-scroll">{children}</main>
+            <main className="relative flex-1 overflow-y-scroll">{children}</main>
             <TabMenu />
         </div>
     )

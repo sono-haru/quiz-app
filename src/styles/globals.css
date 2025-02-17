@@ -9,6 +9,11 @@
   --foreground: #171717;
 }
 
+@media (orientation: landscape) {
+    #__next {
+        @apply mx-auto sm:aspect-[9/16] h-screen;
+    }
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

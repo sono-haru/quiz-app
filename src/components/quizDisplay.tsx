@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 type QuizItem = {
     question: string;
     answer: boolean;
@@ -58,14 +59,14 @@ export const QuizDisplay = ({ quizData }: QuizDisplayProps) => {
                 </button>
             </div>
 
-            {isAnswered && (
+            {isAnswered ? (
                 <div>
                     <p>{userAnswer === (currentQuestion.answer ? '〇' : '×') ? '正解!' : '不正解'}</p>
                     <button onClick={handleNextQuestion}>
                         次の問題
                     </button>
                 </div>
-            )}
+            ) : null}
         </div>
     );
 };

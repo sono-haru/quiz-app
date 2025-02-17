@@ -99,7 +99,7 @@ export default function Quiz() {
                 </div>
 
                 {/* 正誤フィードバック */}
-                {feedback && <p className="text-center text-lg font-bold text-red-500">{feedback}</p>}
+                {feedback ? <p className="text-center text-lg font-bold text-red-500">{feedback}</p> : null}
 
                 {/* ボタンエリア */}
                 <div className="flex justify-around mt-20">

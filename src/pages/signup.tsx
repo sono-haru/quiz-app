@@ -8,12 +8,34 @@ import { useRouter } from "next/router";
 const schema = z.object({
     username: z.string().min(3, "ユーザーネームは3文字以上必要です"),
     password: z.string().min(6, "パスワードは6文字以上必要です"),
+    passwordConfirmation: z.string().min(1, "パスワードを再入力してください")
+}).superRefine((data, ctx) => {
+    // パスワードとパスワード（再入力）が一致しているか確認
+    if (data.password !== data.passwordConfirmation) {
+        ctx.addIssue({
+          path: ["passwordConfirmation"],
+          code: "custom",
+          message: "パスワードが一致しません",
+        });
+    }
 });
 
 type Schema = z.infer<typeof schema>;
 
+// フォームのラベルと入力タイプを定義（mapで回せるように）
+const schemaLabels: { [K in keyof Schema]: string } = {
+    username: "ユーザーネーム",
+    password: "パスワード",
+    passwordConfirmation: "パスワード（再入力）"
+}
+const schemaInputTypes: { [K in keyof Schema]: string } = {
+    username: "text",
+    password: "password",
+    passwordConfirmation: "password"
+}
+
 export default function SignUp() {
-    const { register, handleSubmit, formState: { errors } } = useForm<Schema>({
+    const { register, handleSubmit, formState: { errors }, setError } = useForm<Schema>({
         resolver: zodResolver(schema),
     });
     const router = useRouter();
@@ -30,38 +52,38 @@ export default function SignUp() {
             // サインアップ後、ログインページへリダイレクト
             router.push("/login");
         } else {
-            alert("登録に失敗しました。");
+            if (response.status === 422) {
+                if (response.body) {
+                    const { errors } = await response.json();
+                    for (const key in errors) {
+                        setError(key as keyof Schema, { message: errors[key] });
+                    }
+                }
+            } else {
+                alert("登録に失敗しました。");
+            }
         }
     };
 
     return (
         <div className="min-h-screen bg-cover bg-center flex items-center justify-center font-kaisei" style={{ backgroundImage: "url(/signup-img.jpg)" }}>
-            <form className="bg-[#D9D9D9] bg-opacity-40 p-6 rounded border border-white w-[350px] h-[600px] backdrop-blur-sm" onSubmit={handleSubmit(onSubmit)}>
+            <form className="bg-[#D9D9D9] bg-opacity-40 p-6 rounded border border-white w-[350px] h-[600px] overflow-y-auto backdrop-blur-sm" onSubmit={handleSubmit(onSubmit)}>
                 <h1 className="text-[35px] text-center">Sign Up</h1>
 
-                {/* ユーザーネーム */}
-                <label htmlFor="username" className="block mt-4 font-semibold text-white">
-                    ユーザーネーム
-                </label>
-                <input
-                    type="text"
-                    className="rounded-md bg-[#FFFFFF] w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1]"
-                    placeholder="ユーザーネームを入力"
-                    {...register("username")}
-                />
-                {errors.username && <p className="text-red-500 text-sm">{errors.username.message}</p>}
-
-                {/* パスワード */}
-                <label htmlFor="password" className="block mt-4 font-semibold text-white">
-                    パスワード
-                </label>
-                <input
-                    type="password"
-                    className="rounded-md bg-[#FFFFFF] w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1]"
-                    placeholder="パスワードを入力"
-                    {...register("password")}
-                />
-                {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                {Object.keys(schemaLabels).map((key) => (
+                    <div key={key}>
+                        <label htmlFor={key} className="block mt-4 font-semibold text-white">
+                            {schemaLabels[key as keyof Schema]}
+                        </label>
+                        <input
+                            type={schemaInputTypes[key as keyof Schema]}
+                            className="rounded-md bg-[#FFFFFF] text-gray-700 w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1]"
+                            placeholder={`${schemaLabels[key as keyof Schema]}を入力`}
+                            {...register(key as keyof Schema)}
+                        />
+                        {errors[key as keyof Schema] ? <p className="text-red-500 text-sm">{errors[key as keyof Schema]?.message}</p> : null}
+                    </div>
+                ))}
 
                 <div className="flex flex-col items-center">
                     {/* 登録ボタン */}
