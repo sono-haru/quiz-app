@@ -92,8 +92,8 @@ export default function Quiz() {
 
                 {/* 問題文エリア */}
                 <div className="m-8 h-[270px] bg-white rounded-2xl flex flex-col items-center justify-between p-6 text-xl text-center font-semibold border-2 border-[#DBC895]">
-                    <span className="font-kaisei text-[25px]">{`Q. ${currentIndex + 1}`}</span>
-                    <div className="flex-grow flex items-center justify-center">
+                    <span className=" absolute font-kaisei text-[30px] border-b-2 border-dashed ">{`Q. ${currentIndex + 1}`}</span>
+                    <div className=" relative flex-grow flex items-center justify-center">
                         <span>{questions[currentIndex].question}</span>
                     </div>
                 </div>

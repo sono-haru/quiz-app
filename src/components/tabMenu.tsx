@@ -10,25 +10,25 @@ export const TabMenu = () => {
                     alt="ホームボタン"
                     width={70}
                     height={70}
-                    className="mb-[8px] transition-all duration-200 ease-in active:scale-[0.98]" />
+                    className="mb-[6px] transition-all duration-200 ease-in active:scale-[0.98]" />
             </Link>
 
-            <Link href="/account">
-                <Image
-                    src="/button-account.png"
-                    alt="アカウントボタン"
-                    width={70}
-                    height={70}
-                    className="mb-[8px] transition-all duration-200 ease-in active:scale-[0.98]" />
-            </Link>
-
-            <Link href="ranking">
+            <Link href="/ranking">
                 <Image
                     src="/button-ranking.png"
                     alt="ランキングボタン"
                     width={70}
                     height={70}
                     className="mb-[10px] transition-all duration-200 ease-in active:scale-[0.98]" />
+            </Link>
+
+            <Link href="/etc">
+                <Image
+                    src="/button-etc.png"
+                    alt="etcボタン"
+                    width={70}
+                    height={70}
+                    className="mb-[6px] transition-all duration-200 ease-in active:scale-[0.98]" />
             </Link>
         </div>
     )
