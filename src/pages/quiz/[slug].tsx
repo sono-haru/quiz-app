@@ -1,9 +1,10 @@
+import { useSession } from "next-auth/react"; // useSession をインポート
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Layout } from "@/components/layout";
 import { useState, useEffect } from "react";
 
-// JSONファイルをインポート
+// JSONファイルのインポート
 import htmlQuestionsData from "@/quizdata/html-data.json";
 import cssQuestionsData from "@/quizdata/css-data.json";
 import pythonQuestionsData from "@/quizdata/python-data.json";
@@ -14,64 +15,82 @@ type Question = {
     answer: boolean;
 };
 
-// クイズコンポーネント
 export default function Quiz() {
+    const { data: session } = useSession(); // ログイン中のユーザー情報を取得
     const router = useRouter();
     const { slug } = router.query;
 
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [feedback, setFeedback] = useState<string | null>(null);
-    const [score, setScore] = useState(0); // ユーザーの点数
+    const [score, setScore] = useState(0); // 一時的なスコア（5問ごとに表示してリセット）
 
     useEffect(() => {
         if (!slug) return;
 
-        // `slug` を `subject` と `level` に分割（例: `html-1` → `html`, `1`）
         const [subject, level] = (slug as string).split("-");
         const levelNumber = parseInt(level, 10);
 
-        // 科目に応じたデータを選択
         let selectedQuestions: Question[] = [];
         switch (subject.toLowerCase()) {
-        case "html":
-            selectedQuestions = htmlQuestionsData
-                .find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)
-                ?.items || [];
-            break;
-        case "css":
-            selectedQuestions = cssQuestionsData
-                .find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)
-                ?.items || [];
-            break;
-        case "python":
-            selectedQuestions = pythonQuestionsData
-                .find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)
-                ?.items || [];
-            break;
-        case "django":
-            selectedQuestions = djangoQuestionsData
-                .find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)
-                ?.items || [];
-            break;
-        default:
-            break;
+            case "html":
+                selectedQuestions = htmlQuestionsData.find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)?.items || [];
+                break;
+            case "css":
+                selectedQuestions = cssQuestionsData.find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)?.items || [];
+                break;
+            case "python":
+                selectedQuestions = pythonQuestionsData.find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)?.items || [];
+                break;
+            case "django":
+                selectedQuestions = djangoQuestionsData.find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)?.items || [];
+                break;
+            default:
+                break;
         }
 
         setQuestions(selectedQuestions);
-        setCurrentIndex(0); // 初期化
-        setScore(0); // 点数初期化
+        setCurrentIndex(0);
+        setScore(0);
     }, [slug]);
 
-    // 回答処理
-    const handleAnswer = (userAnswer: boolean) => {
+    // 回答処理（ログイン中のユーザーIDを使用）
+    const handleAnswer = async (userAnswer: boolean) => {
         if (questions.length === 0) return;
+        if (!session?.user?.id) {
+            console.error("ユーザーがログインしていません");
+            return;
+        }
 
         const isCorrect = questions[currentIndex].answer === userAnswer;
+        const userId = session.user.id; // ログイン中のユーザーID
+        const questionId = `${slug}-${currentIndex}`;
+
         if (isCorrect) {
-            setScore(prevScore => prevScore + 20); // 正解なら20点追加
+            try {
+                // APIエンドポイントにリクエストを送信して、初めて正解した場合のみ totalScore を更新
+                const response = await fetch("/api/answer", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ userId, username: session.user.username, questionId, correct: true }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    // data.firstAnswered が true の場合のみ、合計得点（totalScore）が更新されたと判断
+                    // ※ここでは、ローカルの一時スコア（score）は別途管理し、totalScore はサーバー側で保持
+                    if (data.firstAnswered) {
+                        console.log("初回正解のため totalScore が更新されました");
+                    }
+                }
+            } catch (error) {
+                console.error("エラー:", error);
+            }
+
+            setFeedback("正解！🎉");
+        } else {
+            setFeedback("不正解 😢");
         }
-        setFeedback(isCorrect ? "正解！🎉" : "不正解 😢");
 
         setTimeout(() => {
             if (currentIndex < questions.length - 1) {
@@ -79,7 +98,9 @@ export default function Quiz() {
                 setFeedback(null);
             } else {
                 alert("クイズ終了！お疲れさまでした 🎉");
-                router.push("/"); // ホームへ戻る（必要に応じて変更）
+                // クイズ終了時は、一時的なスコア（score）をリセットする
+                setScore(0);
+                router.push("/"); // 必要に応じて結果表示ページに遷移
             }
         }, 1000);
     };
@@ -89,10 +110,9 @@ export default function Quiz() {
     return (
         <Layout headerImgSrc={`/${slug}.jpg`}>
             <div className="flex flex-col h-full">
-
                 {/* 問題文エリア */}
                 <div className="m-8 h-[270px] bg-white rounded-2xl flex flex-col items-center justify-between p-6 text-xl text-center font-semibold border-2 border-[#DBC895]">
-                    <span className=" absolute font-kaisei text-[30px] border-b-2 border-dashed ">{`Q. ${currentIndex + 1}`}</span>
+                    <span className=" absolute font-kaisei text-[30px] border-b-2 border-dashed">{`Q. ${currentIndex + 1}`}</span>
                     <div className=" relative flex-grow flex items-center justify-center">
                         <span>{questions[currentIndex].question}</span>
                     </div>
@@ -106,19 +126,12 @@ export default function Quiz() {
                     <button onClick={() => handleAnswer(true)}>
                         <Image src="/true-button.jpg" width={110} height={110} alt="マルボタン" className="rounded-2xl" />
                     </button>
-
                     <button onClick={() => handleAnswer(false)}>
                         <Image src="/false-button.jpg" width={110} height={110} alt="バツボタン" className="rounded-2xl" />
-                    </button>
+                 </button>
                 </div>
 
-                {/* 100点達成時の画像表示 */}
-                {score === 100 && (
-                    <div className="text-center mt-8">
-                        <Image src="/congratulations-image.jpg" width={300} height={300} alt="おめでとう画像" className="rounded-2xl" />
-                        <p className="text-xl font-semibold mt-4">100点達成！おめでとう！🎉</p>
-                    </div>
-                )}
+                {/* ※ score はクイズ中の一時得点なのでここで表示しない */}
             </div>
         </Layout>
     );

@@ -9,7 +9,7 @@ export default function Etc() {
         <Layout headerImgSrc="/etc-header.jpg">
             <div className="max-w-full font-kaisei pt-10 px-10 text-center bg-[#F6F6F6] min-h-screen">
 
-                <div className="pb-7">
+                <div className="pb-7 ">
                     <Link href="/TermsOfService">
                         <Image
                             src="/terms-mini-icon.svg"
@@ -36,7 +36,7 @@ export default function Etc() {
                             height={32}
                             className="absolute mt-4 ml-8 rounded"
                         />
-                        <p className="text-3xl bg-white h-[60px] rounded-lg pt-3 text-gray-800">ホームページ</p>
+                        <p className="text-3xl bg-white h-[60px] rounded-lg pt-3 ml-2 text-gray-800">ホームページ</p>
                     </a>
                 </div>
 

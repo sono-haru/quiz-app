@@ -30,8 +30,22 @@ model User {
   password        String
   email           String?   @unique
   emailVerified   Boolean   @default(false)
+  totalScore      Int       @default(0)
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
   sessions Session[]
+  answeredQuestions AnsweredQuestions[]  @relation("UserToAnsweredQuestions")
+}
+
+model AnsweredQuestions {
+  id            String   @id @default(uuid())
+  userId        String
+  questionId    String   // slug と index を組み合わせた ID
+  username      String
+  correct       Boolean  // 正解かどうかを追跡
+  firstAnswered Boolean   @default(false) // 初めて正解したかどうか
+  user       User    @relation("UserToAnsweredQuestions", fields: [userId], references: [id])
+
+  @@unique([userId, questionId]) // ユーザーIDと問題IDの組み合わせでユニーク制約
 }
