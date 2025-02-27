@@ -94,6 +94,7 @@ export default function Quiz() {
         setAnswered(true);
 
         if (userIsCorrect) {
+            setScore(prevScore => prevScore + 20);
             try {
                 // APIエンドポイントにリクエストを送信（初回正解の場合のみ totalScore を更新）
                 const response = await fetch("/api/answer", {
@@ -128,8 +129,7 @@ export default function Quiz() {
             setUserAnswer(null);
         } else {
             alert("クイズ終了！お疲れさまでした 🎉");
-            setScore(0);
-            router.push("/");
+            router.push(`/score?score=${score}&headerImgSrc=/${slug}.jpg`);
         }
     };
 
@@ -153,22 +153,36 @@ export default function Quiz() {
             className="absolute left-0 rounded-2xl ml-5 mt-10"
         />
 
-    </div>
-    {/* 質問内容の表示 */}
-    <div className="relative flex-grow flex items-center justify-center">
-        <span>{questions[currentIndex].question}</span>
-    </div>
-</div>
+            </div>
+            {/* 質問内容の表示 */}
+            <div className="relative flex-grow flex items-center justify-center">
+                <span>{questions[currentIndex].question}</span>
+            </div>
+        </div>
 
 
                 {!answered ? (
                     // 回答前は解答ボタンを表示
                     <div className="flex justify-around mt-20">
-                        <button onClick={() => handleAnswer(true)}>
-                            <Image src="/true-button.jpg" width={110} height={110} alt="マルボタン" className="rounded-2xl" />
+                        <button className="relative" onClick={() => handleAnswer(true)}>
+                            <Image src="/true-button.svg" width={110} height={110} alt="マルボタン" className="rounded-2xl" />
+                            <Image
+                                src="/dinosaur2.png"
+                                width={65}
+                                height={65}
+                                alt="トリケラ画像"
+                                className="absolute rounded-2xl -top-6 rotate-[-20deg]"
+                            />
                         </button>
-                        <button onClick={() => handleAnswer(false)}>
-                            <Image src="/false-button.jpg" width={110} height={110} alt="バツボタン" className="rounded-2xl" />
+                        <button className="relative" onClick={() => handleAnswer(false)}>
+                            <Image
+                                src="/dog.png"
+                                width={70}
+                                height={70}
+                                alt="犬画像"
+                                className="absolute rounded-2xl bottom-20"
+                            />
+                            <Image src="/false-button.svg" width={110} height={110} alt="バツボタン" className="rounded-2xl" />
                         </button>
                     </div>
                 ) : (
@@ -181,13 +195,19 @@ export default function Quiz() {
                                 <p className="text-lg font-bold text-blue-500">不正解...</p>
                                 {/* 不正解の場合、JSONファイルの correctAnswer を表示 */}
                                 {!!questions[currentIndex].correctAnswer && (
-                                    <div className="bg-gray-200 p-4 rounded-md mt-2 border-2 border-blue-200">
-                                        <p className="text-md mt-2">
-                                            {questions[currentIndex].correctAnswer}
-                                        </p>
+                                    <div className="relative bg-gray-200 p-4 rounded-md mt-2 border-2 border-blue-200">
+                                        <Image
+                                            src="/dinosaur.png"
+                                            width={60}
+                                            height={60}
+                                            alt="恐竜画像"
+                                            className="absolute right-0 -top-8 rounded-2xl"
+                                        />
+                                        <p className="text-md mt-2">{questions[currentIndex].correctAnswer}</p>
                                     </div>
                                 )}
                             </div>
+
                         )}
                         <button onClick={handleNextQuestion} className="drop-shadow-lg mt-5 bg-blue-400 px-10 rounded-md text-white text-lg pt-2.5 pb-2.5">
                             次の問題へ

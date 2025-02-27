@@ -49,7 +49,7 @@ export default function Etc() {
                             height={32}
                             className="absolute mt-4 ml-8 rounded"
                         />
-                        <p className="text-3xl bg-white h-[60px] rounded-lg pt-3 ml-2 text-gray-800">ホームページ</p>
+                        <p className="text-3xl bg-white h-[60px] rounded-lg pt-3 pl-4 text-gray-800">ホームページ</p>
                     </a>
                 </div>
 
