@@ -1,82 +1,88 @@
 [
-    {
-        "subject": "django",
-        "level": 1,
-        "items": [
-            {
-                "question": "urls.pyファイルは、URLパターンとviewを関連付けるために使用される。",
-                "answer": true
-            },
-            {
-                "question": "urlpatternsにおいて、url()関数を使ってURLパターンを定義することが推奨されている。",
-                "answer": false
-            },
-            {
-                "question": "views.pyファイルには、Webページに対するレスポンスを返す関数やクラスが定義される。",
-                "answer": true
-            },
-            {
-                "question": "静的ファイル（CSS、JavaScript、画像など）はstaticディレクトリ内に配置する。",
-                "answer": true
-            },
-            {
-                "question": "templatesはHTMLファイルを格納するディレクトリであり、動的コンテンツを埋め込むために使用される。",
-                "answer": true
-            }
-        ]
-    },
-    {
-        "subject": "django",
-        "level": 2,
-        "items": [
-            {
-                "question": "ForeignKeyフィールドを使うことで、1対1のリレーションを表現することができる。",
-                "answer": false
-            },
-            {
-                "question": "ModelFormを使用することで、Djangoのモデルから自動的にフォームを生成することができる。",
-                "answer": true
-            },
-            {
-                "question": "request.POSTは、フォームのデータを含んでいる。",
-                "answer": true
-            },
-            {
-                "question": "アプリを新規作成する時は、「python manage.py startproject」コマンドを使う。",
-                "answer": false
-            },
-            {
-                "question": "settings.pyのINSTALLED_APPSにアプリケーションを追加するだけで、自動的にDBテーブルを作成する。",
-                "answer": false
-            }
-        ]
-    },
-    {
-        "subject": "django",
-        "level": 3,
-        "items": [
-            {
-                "question": "urls.pyにおいて、view関数に引数を渡す際にurl()ではなくre_path()を使用することが推奨されている。",
-                "answer": false
-            },
-            {
-                "question": "",
-                "answer": false
-            },
-            {
-                "question": "「on_delete=models.CASCADE」は親インスタンス削除時に子インスタンスも削除する。",
-                "answer": true
-            },
-            {
-                "question": "get_object_or_404はオブジェクトが見つからないとHttp404エラーを発生させる。",
-                "answer": true
-            },
-            {
-                "question": "",
-                "answer": false
-            }
-        ]
-    }
-    
-
+  {
+      "subject": "django",
+      "level": 1,
+      "items": [
+          {
+              "question": "DjangoはMVCという考え方が用いられている。(Model,View,Controllerの略)",
+              "answer": false,
+              "correctAnswer": "DjangoではMTVという考え方を用いる。(Model.template,Viewの略)"
+          },
+          {
+              "question": "urlpatternsにおいて、url()関数を使ってURLパターンを定義することが推奨されている。",
+              "answer": false,
+              "correctAnswer": "Django 2.0以降では、url() ではなく path() や re_path() を使用するのが推奨されている。"
+          },
+          {
+              "question": "views.pyファイルには、Webページに対するレスポンスを返す関数やクラスが定義される。",
+              "answer": true
+          },
+          {
+              "question": "静的ファイル（CSS、JavaScript、画像など）はstaticディレクトリ内に配置する。",
+              "answer": true
+          },
+          {
+              "question": "templatesはHTMLファイルを格納するディレクトリであり、動的コンテンツを埋め込むために使用される。",
+              "answer": true
+          }
+      ]
+  },
+  {
+      "subject": "django",
+      "level": 2,
+      "items": [
+          {
+              "question": "ForeignKeyフィールドを使うことで、1対1のリレーションを表現することができる。",
+              "answer": false,
+              "correctAnswer": "1対1のリレーションを表現するには、ForeignKey ではなく OneToOneField を使用する。"
+          },
+          {
+              "question": "ModelFormを使用することで、Djangoのモデルから自動的にフォームを生成することができる。",
+              "answer": true
+          },
+          {
+              "question": "request.POSTは、フォームのデータを含んでいる。",
+              "answer": true
+          },
+          {
+              "question": "アプリを新規作成する時は、「python manage.py startproject」コマンドを使う。",
+              "answer": false,
+              "correctAnswer": "「python manage.py startproject」 はプロジェクトを作成するコマンドであり、アプリを作成するには「python manage.py startapp」を使用する。"
+          },
+          {
+              "question": "settings.pyのINSTALLED_APPSにアプリケーションを追加するだけで、自動的にDBテーブルを作成する。",
+              "answer": false,
+              "correctAnswer": "INSTALLED_APPS に追加した後、「python manage.py makemigrations」と「python manage.py migrate」を実行しないとDBテーブルは作成されない。"
+          }
+      ]
+  },
+  {
+      "subject": "django",
+      "level": 3,
+      "items": [
+          {
+              "question": "Djangoで静的ファイルを管理する場合、staticフォルダにファイルを置くだけで自動的に認識される。",
+              "answer": false,
+              "correctAnswer": "静的ファイルを管理するには、settings.pyのSTATICFILES_DIRSを正しく設定し、collectstaticコマンドでファイルを収集する必要がある。"
+          },
+          {
+              "question": "DjangoのデフォルトのORMでは、SQLを直接記述する必要がある。",
+              "answer": false,
+              "correctAnswer": "DjangoのORMはPythonコードを使用してデータベース操作が可能であり、通常はSQLを直接記述する必要はない。"
+          },
+          {
+              "question": "「on_delete=models.CASCADE」は親インスタンス削除時に子インスタンスも削除する。",
+              "answer": true
+          },
+          {
+              "question": "get_object_or_404はオブジェクトが見つからないとHttp404エラーを発生させる。",
+              "answer": true
+          },
+          {
+              "question": "Djangoのテンプレートエンジンでは、Pythonの全ての関数をテンプレート内で使用できる。",
+              "answer": false,
+              "correctAnswer": "Djangoのテンプレートエンジンでは、安全性のために一部のPython関数のみが使用できる。独自のテンプレートフィルターを作成することで機能を拡張できる。"
+          }
+      ]
+  }
 ]

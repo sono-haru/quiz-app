@@ -1,80 +1,88 @@
 [
-    {
-        "subject": "CSS",
-        "level": 1,
-        "items": [
-            {
-                "question": "mragin-leftを5px指定すると要素は左方向に5px移動する。",
-                "answer": false
-            },
-            {
-                "question": "「line-height」は、テキストの行間を設定することができる。",
-                "answer": true
-            },
-            {
-                "question": "「margin」は、要素の内側のスペースを調整するために使用される。",
-                "answer": false
-            },
-            {
-                "question": "「color: red;」を指定すると、要素の背景色が赤色に変更される。",
-                "answer": false
-            },
-            {
-                "question": "「font-size」の指定で「em」を使うと、相対的なフォントサイズを設定することができる。",
-                "answer": true
-            }
-        ]
-    },
-    {
-        "subject": "CSS",
-        "level": 2,
-        "items": [
-            {
-                "question": "「dotted」は破線を、「dashed」は点線を書くことができる。",
-                "answer": false
-            },
-            {
-                "question": "要素の透明度を変更する「opacity」は0～10の値で指定する。",
-                "answer": false
-            },
-            {
-                "question": "activeを用いることで要素をクリックしたときの動作を指定できる。",
-                "answer": true
-            },
-            {
-                "question": "要素同士の重なりを指定する「z-index」は値が小さい順に上に表示される。",
-                "answer": false
-            },
-            {
-                "question": "transform: rotate(45deg); は、要素を時計回りに45度回転させる。",
-                "answer": true
-            }
-        ]
-    },
-    {
-        "subject": "CSS",
-        "level": 3,
-        "items": [
-            {
-                "question": "「position: fixed;」を指定した要素は、スクロールしても位置が変わらない。",
-                "answer": true
-            },
-            {
-                "question": "「:focus」疑似クラスは、キーボード操作以外で要素にフォーカスを当てることはできない。",
-                "answer": false
-            },
-            {
-                "question": "「visibility: hidden;」は、要素を非表示にするが、要素のレイアウトはそのまま残る。",
-                "answer": true
-            },
-            {
-                "question": "「opacity」で透明度を設定すると、要素の内容だけでなく、背景色やボーダーも透明になる。",
-                "answer": true
-            },
-            {
-                "question": "「margin: 0 auto;」は、要素を垂直方向に中央に配置するために使用される。",
-                "answer": false
-            }
-        ]
-    }
+  {
+      "subject": "CSS",
+      "level": 1,
+      "items": [
+          {
+              "question": "mragin-leftを5px指定すると要素は左方向に5px移動する。",
+              "answer": false,
+              "correctAnswer": "margin-leftを5px指定すると、要素は右方向に5px移動します。"
+          },
+          {
+              "question": "「line-height」は、テキストの行間を設定することができる。",
+              "answer": true
+          },
+          {
+              "question": "「margin」は、要素の内側のスペースを調整するために使用される。",
+              "answer": false,
+              "correctAnswer": "marginは要素の外側のスペースを調整するために使用され、内側のスペースを調整するのはpaddingです。"
+          },
+          {
+              "question": "「color: red;」を指定すると、要素の背景色が赤色に変更される。",
+              "answer": false,
+              "correctAnswer": "color: red; はテキストの色を赤色に変更します。背景色を変更するには background-color: red; を使用します。"
+          },
+          {
+              "question": "「font-size」の指定で「em」を使うと、相対的なフォントサイズを設定することができる。",
+              "answer": true
+          }
+      ]
+  },
+  {
+      "subject": "CSS",
+      "level": 2,
+      "items": [
+          {
+              "question": "「dotted」は破線を、「dashed」は点線を書くことができる。",
+              "answer": false,
+              "correctAnswer": "dotted は点線、dashed は破線を描画します。"
+          },
+          {
+              "question": "要素の透明度を変更する「opacity」は0～10の値で指定する。",
+              "answer": false,
+              "correctAnswer": "opacity は 0 から 1 の範囲で指定します。"
+          },
+          {
+              "question": "activeを用いることで要素をクリックしたときの動作を指定できる。",
+              "answer": true
+          },
+          {
+              "question": "要素同士の重なりを指定する「z-index」は値が小さい順に上に表示される。",
+              "answer": false,
+              "correctAnswer": "z-index の値が大きいほど前面に表示されます。"
+          },
+          {
+              "question": "transform: rotate(45deg); は、要素を時計回りに45度回転させる。",
+              "answer": true
+          }
+      ]
+  },
+  {
+      "subject": "CSS",
+      "level": 3,
+      "items": [
+          {
+              "question": "「position: fixed;」を指定した要素は、スクロールしても位置が変わらない。",
+              "answer": true
+          },
+          {
+              "question": "「:focus」疑似クラスは、キーボード操作以外で要素にフォーカスを当てることはできない。",
+              "answer": false,
+              "correctAnswer": ":focus 疑似クラスはマウスクリックなどの操作でも要素にフォーカスを当てることができます。"
+          },
+          {
+              "question": "「visibility: hidden;」は、要素を非表示にするが、要素のレイアウトはそのまま残る。",
+              "answer": true
+          },
+          {
+              "question": "「opacity」で透明度を設定すると、要素の内容だけでなく、背景色やボーダーも透明になる。",
+              "answer": true
+          },
+          {
+              "question": "「margin: 0 auto;」は、要素を垂直方向に中央に配置するために使用される。",
+              "answer": false,
+              "correctAnswer": "margin: 0 auto; はブロック要素を水平方向に中央配置するために使用されます。"
+          }
+      ]
+  }
 ]

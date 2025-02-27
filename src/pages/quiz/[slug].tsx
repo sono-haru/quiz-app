@@ -10,9 +10,11 @@ import cssQuestionsData from "@/quizdata/css-data.json";
 import pythonQuestionsData from "@/quizdata/python-data.json";
 import djangoQuestionsData from "@/quizdata/django-data.json";
 
+// Question 型に correctAnswer を追加
 type Question = {
     question: string;
     answer: boolean;
+    correctAnswer?: string;
 };
 
 export default function Quiz() {
@@ -21,12 +23,9 @@ export default function Quiz() {
     const router = useRouter();
     const { slug } = router.query;
 
-    // userのログイン状態の管理
+    // 未ログインの場合はログイン画面へリダイレクト
     useEffect(() => {
-        // 読み込み中は何もしない
         if (status === "loading") return;
-
-        // ログインしていない場合、ログイン画面にリダイレクト
         if (!session) {
             router.push("/login");
         }
@@ -34,7 +33,9 @@ export default function Quiz() {
 
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [feedback, setFeedback] = useState<string | null>(null);
+    const [answered, setAnswered] = useState(false);
+    const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+    const [userAnswer, setUserAnswer] = useState<boolean | null>(null);
     const [score, setScore] = useState(0);
 
     useEffect(() => {
@@ -46,16 +47,24 @@ export default function Quiz() {
         let selectedQuestions: Question[] = [];
         switch (subject.toLowerCase()) {
             case "html":
-                selectedQuestions = htmlQuestionsData.find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)?.items || [];
+                selectedQuestions = htmlQuestionsData.find(
+                    (q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber
+                )?.items || [];
                 break;
             case "css":
-                selectedQuestions = cssQuestionsData.find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)?.items || [];
+                selectedQuestions = cssQuestionsData.find(
+                    (q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber
+                )?.items || [];
                 break;
             case "python":
-                selectedQuestions = pythonQuestionsData.find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)?.items || [];
+                selectedQuestions = pythonQuestionsData.find(
+                    (q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber
+                )?.items || [];
                 break;
             case "django":
-                selectedQuestions = djangoQuestionsData.find((q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber)?.items || [];
+                selectedQuestions = djangoQuestionsData.find(
+                    (q) => q.subject.toLowerCase() === subject.toLowerCase() && q.level === levelNumber
+                )?.items || [];
                 break;
             default:
                 break;
@@ -64,27 +73,38 @@ export default function Quiz() {
         setQuestions(selectedQuestions);
         setCurrentIndex(0);
         setScore(0);
+        setAnswered(false);
+        setIsCorrect(null);
+        setUserAnswer(null);
     }, [slug]);
 
-    // 回答処理（ログイン中のユーザーIDを使用）
-    const handleAnswer = async (userAnswer: boolean) => {
+    // 回答処理：回答ボタンをクリックしたときに呼ばれる
+    const handleAnswer = async (answer: boolean) => {
         if (questions.length === 0) return;
         if (!session?.user?.id) {
             console.error("ユーザーがログインしていません");
             return;
         }
 
-        const isCorrect = questions[currentIndex].answer === userAnswer;
-        const userId = session.user.id; // ログイン中のユーザーID
-        const questionId = `${slug}-${currentIndex}`;
+        const correctAnswerValue = questions[currentIndex].answer;
+        const userIsCorrect = correctAnswerValue === answer;
 
-        if (isCorrect) {
+        setIsCorrect(userIsCorrect);
+        setUserAnswer(answer);
+        setAnswered(true);
+
+        if (userIsCorrect) {
             try {
-                // APIエンドポイントにリクエストを送信して、初めて正解した場合のみ totalScore を更新
+                // APIエンドポイントにリクエストを送信（初回正解の場合のみ totalScore を更新）
                 const response = await fetch("/api/answer", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ userId, username: session.user.username, questionId, correct: true }),
+                    body: JSON.stringify({
+                        userId: session.user.id,
+                        username: session.user.username,
+                        questionId: `${slug}-${currentIndex}`,
+                        correct: true,
+                    }),
                 });
 
                 if (response.ok) {
@@ -96,22 +116,21 @@ export default function Quiz() {
             } catch (error) {
                 console.error("エラー:", error);
             }
-
-            setFeedback("正解！🎉");
-        } else {
-            setFeedback("不正解 😢");
         }
+    };
 
-        setTimeout(() => {
-            if (currentIndex < questions.length - 1) {
-                setCurrentIndex(currentIndex + 1);
-                setFeedback(null);
-            } else {
-                alert("クイズ終了！お疲れさまでした 🎉");
-                setScore(0);
-                router.push("/");
-            }
-        }, 1000);
+    // 次の問題へ遷移する処理
+    const handleNextQuestion = () => {
+        if (currentIndex < questions.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+            setAnswered(false);
+            setIsCorrect(null);
+            setUserAnswer(null);
+        } else {
+            alert("クイズ終了！お疲れさまでした 🎉");
+            setScore(0);
+            router.push("/");
+        }
     };
 
     if (!questions.length) return <p className="text-center mt-20">問題が見つかりません</p>;
@@ -120,25 +139,61 @@ export default function Quiz() {
         <Layout headerImgSrc={`/${slug}.jpg`}>
             <div className="flex flex-col h-full">
                 {/* 問題文エリア */}
-                <div className="m-8 h-[270px] bg-white rounded-2xl flex flex-col items-center justify-between p-6 text-xl text-center font-semibold border-2 border-[#DBC895]">
-                    <span className=" absolute font-kaisei text-[30px] border-b-2 border-dashed">{`Q. ${currentIndex + 1}`}</span>
-                    <div className=" relative flex-grow flex items-center justify-center">
-                        <span>{questions[currentIndex].question}</span>
+                <div className="mx-8 mt-8 mb-4 h-[270px] bg-white rounded-2xl flex flex-col items-center justify-between p-6 text-xl text-center font-semibold border-2 border-[#DBC895]">
+    {/* 問題番号 + 画像の配置 */}
+    <div className="relative w-full flex justify-center items-center">
+        <p className="font-kaisei text-[30px] pb-2 border-b-2 border-dashed border-black">
+            {`Q. ${currentIndex + 1}`}
+        </p>
+        <Image
+            src="/cat.png"
+            width={60}
+            height={60}
+            alt="猫画像"
+            className="absolute left-0 rounded-2xl ml-5 mt-10"
+        />
+
+    </div>
+    {/* 質問内容の表示 */}
+    <div className="relative flex-grow flex items-center justify-center">
+        <span>{questions[currentIndex].question}</span>
+    </div>
+</div>
+
+
+                {!answered ? (
+                    // 回答前は解答ボタンを表示
+                    <div className="flex justify-around mt-20">
+                        <button onClick={() => handleAnswer(true)}>
+                            <Image src="/true-button.jpg" width={110} height={110} alt="マルボタン" className="rounded-2xl" />
+                        </button>
+                        <button onClick={() => handleAnswer(false)}>
+                            <Image src="/false-button.jpg" width={110} height={110} alt="バツボタン" className="rounded-2xl" />
+                        </button>
                     </div>
-                </div>
-
-                {/* 正誤フィードバック */}
-                {feedback ? <p className="text-center text-lg font-bold text-red-500">{feedback}</p> : null}
-
-                {/* ボタンエリア */}
-                <div className="flex justify-around mt-20">
-                    <button onClick={() => handleAnswer(true)}>
-                        <Image src="/true-button.jpg" width={110} height={110} alt="マルボタン" className="rounded-2xl" />
-                    </button>
-                    <button onClick={() => handleAnswer(false)}>
-                        <Image src="/false-button.jpg" width={110} height={110} alt="バツボタン" className="rounded-2xl" />
-                    </button>
-                </div>
+                ) : (
+                    // 回答済みの場合はフィードバックと次の問題へのボタンを表示
+                    <div className="flex flex-col items-center max-w-full px-10">
+                        {isCorrect ? (
+                            <p className="text-center text-xl font-bold text-red-400">正解！🎉</p>
+                        ) : (
+                            <div className="text-center">
+                                <p className="text-lg font-bold text-blue-500">不正解...</p>
+                                {/* 不正解の場合、JSONファイルの correctAnswer を表示 */}
+                                {!!questions[currentIndex].correctAnswer && (
+                                    <div className="bg-gray-200 p-4 rounded-md mt-2 border-2 border-blue-200">
+                                        <p className="text-md mt-2">
+                                            {questions[currentIndex].correctAnswer}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                        <button onClick={handleNextQuestion} className="drop-shadow-lg mt-5 bg-blue-400 px-10 rounded-md text-white text-lg pt-2.5 pb-2.5">
+                            次の問題へ
+                        </button>
+                    </div>
+                )}
             </div>
         </Layout>
     );

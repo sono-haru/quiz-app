@@ -1,80 +1,88 @@
 [
-    {
-        "subject": "python",
-        "level": 1,
-        "items": [
-            {
-                "question": "キーボードが平仮名のままでpythonと入力すると「ｐｙちょｎ」と入力される。",
-                "answer": false
-            },
-            {
-                "question": " Pythonでは、==は代入演算子として使用される。",
-                "answer": false
-            },
-            {
-                "question": "try-exceptブロックを使用することで、エラーが発生してもプログラムの実行を続けることができる。",
-                "answer": true
-            },
-            {
-                "question": "Pythonでリストの長さを取得するための関数は「length()」である。",
-                "answer": false
-            },
-            {
-                "question": "Pythonでコメントを追加するために使用する記号は「#」である。",
-                "answer": true
-            }
-        ]
-    },
-    {
-        "subject": "python",
-        "level": 2,
-        "items": [
-            {
-                "question": "クラスのインスタンスメソッドで「self」を省略することができる。",
-                "answer": false
-            },
-            {
-                "question": "dictのキーとしてNoneを使用することができない。",
-                "answer": false
-            },
-            {
-                "question": "str型の変数に対して、+演算子を使用すると新しい文字列が生成される。",
-                "answer": true
-            },
-            {
-                "question": "Pythonで辞書のキーを取り出すために使用するメソッドは「keys()」である。",
-                "answer": true
-            },
-            {
-                "question": "文字列を小文字に変換するメソッドは「lower()」である。",
-                "answer": true
-            }
-        ]
-    },
-    {
-        "subject": "python",
-        "level": 3,
-        "items": [
-            {
-                "question": "リストの要素を削除するためのメソッドは「delete()」である。",
-                "answer": false
-            },
-            {
-                "question": "辞書の値にアクセスするために使用する方法は「dict[key]」である。",
-                "answer": true
-            },
-            {
-                "question": "lambda関数は、複数の式を一度に実行することができる。",
-                "answer": false
-            },
-            {
-                "question": "__init__メソッドは、必ずしもself引数を取る必要はない。",
-                "answer": false
-            },
-            {
-                "question": "open関数でファイルを開く際に、「'r'」モードは読み取り専用を意味する。",
-                "answer": true
-            }
-        ]
-    }
+  {
+      "subject": "python",
+      "level": 1,
+      "items": [
+          {
+              "question": "キーボードが平仮名のままでpythonと入力すると「ｐｙちょｎ」と入力される。",
+              "answer": false,
+              "correctAnswer": "[ｐｙてょｎ]と入力される。"
+          },
+          {
+              "question": "Pythonでは、== は代入演算子として使用される。",
+              "answer": false,
+              "correctAnswer": "== は比較演算子であり、代入には = を使用する。"
+          },
+          {
+              "question": "try-exceptブロックを使用することで、エラーが発生してもプログラムの実行を続けることができる。",
+              "answer": true
+          },
+          {
+              "question": "Pythonでリストの長さを取得するための関数は「length()」である。",
+              "answer": false,
+              "correctAnswer": "リストの長さを取得するには length() ではなく len() を使用する。"
+          },
+          {
+              "question": "Pythonでコメントを追加するために使用する記号は「#」である。",
+              "answer": true
+          }
+      ]
+  },
+  {
+      "subject": "python",
+      "level": 2,
+      "items": [
+          {
+              "question": "クラスのインスタンスメソッドで「self」を省略することができる。",
+              "answer": false,
+              "correctAnswer": "インスタンスメソッドでは self を省略できない。self はインスタンスを指す。"
+          },
+          {
+              "question": "dictのキーとしてNoneを使用することができない。",
+              "answer": false,
+              "correctAnswer": "Pythonの辞書では None をキーとして使用できる。"
+          },
+          {
+              "question": "str型の変数に対して、+演算子を使用すると新しい文字列が生成される。",
+              "answer": true
+          },
+          {
+              "question": "Pythonで辞書のキーを取り出すために使用するメソッドは「keys()」である。",
+              "answer": true
+          },
+          {
+              "question": "文字列を小文字に変換するメソッドは「lower()」である。",
+              "answer": true
+          }
+      ]
+  },
+  {
+      "subject": "python",
+      "level": 3,
+      "items": [
+          {
+              "question": "リストの要素を削除するためのメソッドは「delete()」である。",
+              "answer": false,
+              "correctAnswer": "リストの要素を削除するには delete() ではなく remove() や pop() を使用する。"
+          },
+          {
+              "question": "辞書の値にアクセスするために使用する方法は「dict[key]」である。",
+              "answer": true
+          },
+          {
+              "question": "lambda関数は、複数の式を一度に実行することができる。",
+              "answer": false,
+              "correctAnswer": "lambda関数は1つの式のみ評価でき、複数の式を含めることはできない。"
+          },
+          {
+              "question": "__init__メソッドは、必ずしもself引数を取る必要はない。",
+              "answer": false,
+              "correctAnswer": "__init__メソッドはインスタンスの初期化のためのもので、self 引数は必須である。"
+          },
+          {
+              "question": "open関数でファイルを開く際に、「'r'」モードは読み取り専用を意味する。",
+              "answer": true
+          }
+      ]
+  }
 ]
