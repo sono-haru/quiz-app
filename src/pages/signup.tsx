@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 const schema = z.object({
     username: z.string().min(3, "ユーザーネームは3文字以上必要です"),
-    password: z.string().min(6, "パスワードは6文字以上必要です"),
+    password: z.string().min(4, "パスワードは4文字以上必要です"),
     passwordConfirmation: z.string().min(1, "パスワードを再入力してください")
 }).superRefine((data, ctx) => {
     // パスワードとパスワード（再入力）が一致しているか確認
@@ -93,13 +93,13 @@ export default function SignUp() {
                             alt="登録ボタン"
                             width={150}
                             height={50}
-                            className="rounded-lg border-2 border-white transition-all duration-200 ease-in active:scale-[0.98]"
+                            className="drop-shadow-lg rounded-lg border-2 border-white transition-all duration-200 ease-in active:scale-[0.98]"
                         />
                     </button>
 
                     {/* ログインリンク */}
                     <div className="flex items-center justify-center rounded-lg border-2 border-white bg-[#D9D9D9] opacity-[0.8] w-[185px] h-[35px] mt-[30px]">
-                        <Link href="/login" className="text-center text-[16px]">
+                        <Link href="/login" className="drop-shadow-lg text-center text-[16px]">
                             登録済みの方はこちら
                         </Link>
                     </div>

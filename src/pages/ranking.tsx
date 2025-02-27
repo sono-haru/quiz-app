@@ -31,16 +31,26 @@ export default function Ranking() {
     }
     fetchRankings();
   }, []);
+  const getCurrentRankColor = (rank: number | null) => {
+    if (rank === 1) return "text-[#EDD54B]"; // 金色
+    if (rank === 2) return "text-[#A29A9A]"; // 銀色
+    if (rank === 3) return "text-[#815a2b]"; // 銅色
+    return "text-[#C44747]"; // デフォルトの色
+  };
 
   return (
     <Layout headerImgSrc="/ranking-header.jpg">
       <div className="max-w-full px-12 py-10">
         <div className="bg-white h-[60px] font-kaisei flex justify-evenly gap-3 rounded-lg border-2 border-[#B5D7D3]">
           <p className="mt-4 flex-1 text-end">現在の順位は</p>
-          <p className="text-[30px] text-[#C44747]">
+          <p className={`text-[28px] mt-1 ${getCurrentRankColor(currentRank)}`}>
             {currentRank !== null ? currentRank : "-"}
           </p>
-          <p className="mt-4 flex-1 text-start">位です!!</p>
+
+          <p className="mt-4 flex-1 text-start">位です
+            <span className="ml-2 inline-block rotate-[4deg]">! !</span>
+            </p>
+
         </div>
 
         <ul className="flex mt-10 bg-[#A7DDB6] h-[40px] border-b-4 border-[#92D1E7] rounded-t-lg justify-around opacity-[80%]">
@@ -61,7 +71,7 @@ export default function Ranking() {
               }`}
             >
               <p className="font-kaisei flex-1 text-center">{item.rank}</p>
-              <p className="font-kaisei flex-1 text-center truncate ">{item.username}</p>
+              <p className="font-kaisei flex-1 text-center truncate">{item.username}</p>
               <p className="font-kaisei flex-1 text-center">{item.totalScore}点</p>
             </div>
           ))}

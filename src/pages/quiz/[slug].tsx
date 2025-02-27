@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react"; // useSession をインポート
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Layout } from "@/components/layout";
@@ -16,14 +16,26 @@ type Question = {
 };
 
 export default function Quiz() {
-    const { data: session } = useSession(); // ログイン中のユーザー情報を取得
+    // ログイン中のユーザー情報を取得
+    const { data: session, status } = useSession();
     const router = useRouter();
     const { slug } = router.query;
+
+    // userのログイン状態の管理
+    useEffect(() => {
+        // 読み込み中は何もしない
+        if (status === "loading") return;
+
+        // ログインしていない場合、サインアップ画面にリダイレクト
+        if (!session) {
+            router.push("/signup");
+        }
+    }, [session, status, router]);
 
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [feedback, setFeedback] = useState<string | null>(null);
-    const [score, setScore] = useState(0); // 一時的なスコア（5問ごとに表示してリセット）
+    const [score, setScore] = useState(0);
 
     useEffect(() => {
         if (!slug) return;
@@ -77,8 +89,6 @@ export default function Quiz() {
 
                 if (response.ok) {
                     const data = await response.json();
-                    // data.firstAnswered が true の場合のみ、合計得点（totalScore）が更新されたと判断
-                    // ※ここでは、ローカルの一時スコア（score）は別途管理し、totalScore はサーバー側で保持
                     if (data.firstAnswered) {
                         console.log("初回正解のため totalScore が更新されました");
                     }
@@ -98,9 +108,8 @@ export default function Quiz() {
                 setFeedback(null);
             } else {
                 alert("クイズ終了！お疲れさまでした 🎉");
-                // クイズ終了時は、一時的なスコア（score）をリセットする
                 setScore(0);
-                router.push("/"); // 必要に応じて結果表示ページに遷移
+                router.push("/");
             }
         }, 1000);
     };
@@ -128,10 +137,8 @@ export default function Quiz() {
                     </button>
                     <button onClick={() => handleAnswer(false)}>
                         <Image src="/false-button.jpg" width={110} height={110} alt="バツボタン" className="rounded-2xl" />
-                 </button>
+                    </button>
                 </div>
-
-                {/* ※ score はクイズ中の一時得点なのでここで表示しない */}
             </div>
         </Layout>
     );

@@ -9,6 +9,19 @@ export default function Etc() {
         <Layout headerImgSrc="/etc-header.jpg">
             <div className="max-w-full font-kaisei pt-10 px-10 text-center bg-[#F6F6F6] min-h-screen">
 
+                <div className="pb-7">
+                    <Link href="/account">
+                        <Image
+                            src="/account-mini-icon.svg"
+                            alt="アカウントアイコン"
+                            width={32}
+                            height={32}
+                            className="absolute mt-3 ml-8"
+                        />
+                        <p className="text-3xl bg-white h-[60px] rounded-lg pt-3">アカウント</p>
+                    </Link>
+                </div>
+
                 <div className="pb-7 ">
                     <Link href="/TermsOfService">
                         <Image
@@ -54,7 +67,7 @@ export default function Etc() {
                             height={32}
                             className="absolute mt-4 ml-8 opacity-[90%]"
                         />
-                        <p className="text-3xl bg-white h-[60px] rounded-lg pt-3 text-gray-800">instagram</p>
+                        <p className="text-3xl bg-white h-[60px] rounded-lg pt-3 text-gray-800">Instagram</p>
                     </a>
                 </div>
 
@@ -74,19 +87,6 @@ export default function Etc() {
                         />
                         <p className="text-3xl bg-white h-[60px] rounded-lg pt-3 text-gray-800">X</p>
                     </a>
-                </div>
-
-                <div className="pb-7">
-                    <Link href="/">
-                        <Image
-                            src="/Vector.png"
-                            alt="ログアウトアイコン"
-                            width={23}
-                            height={23}
-                            className="absolute mt-3 ml-10"
-                        />
-                        <p className="text-3xl bg-[#F68A8A] h-[60px] rounded-lg pt-3 text-white">ログアウト</p>
-                    </Link>
                 </div>
 
                 <p className="text-center text-md font-kaisei">© 2025 QuizApp</p>

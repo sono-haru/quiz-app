@@ -8,7 +8,7 @@ export default function TermsOfService(){
             <div className="max-x-full pt-10 px-10 bg-[#F6F6F6] min-h-screen">
 
                 {/* 禁止事項 */}
-                <p className="text-2xl pb-3 font-kaisei text-center border-b-[6px] border-white">- 禁止事項 -</p>
+                <p className="text-red-400 text-2xl pb-3 font-kaisei text-center border-b-[6px] border-white">- 禁止事項 -</p>
                 <p className="text-center mb-3 mt-3">本サービスでは、以下の行為を禁止します。</p>
                 <div className="flex">
                     <p>1.</p>
@@ -25,7 +25,7 @@ export default function TermsOfService(){
                 </div>
 
                 {/* 免責事項 */}
-                <p className="text-2xl pb-3 font-kaisei text-center mt-5 border-b-[6px] border-white">- 免責事項 -</p>
+                <p className="text-red-400 text-2xl pb-3 font-kaisei text-center mt-5 border-b-[6px] border-white">- 免責事項 -</p>
                 <div className="flex mt-3">
                     <p>1.</p>
                     <p className="ml-1">運営者は、本サービスの利用により生じた損害について、一切の責任を負いません。</p>
