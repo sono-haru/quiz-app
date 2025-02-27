@@ -9,9 +9,9 @@ export default function Home() {
     const { status } = useSession();
 
     useEffect(() => {
-        //認証状態を確認し、ログインしていない場合はサインアップページにリダイレクト
+        //ログインしていない場合はログインページにリダイレクト
         if (status === "unauthenticated") {
-            router.push("/signup");
+            router.push("/login");
         }
     }, [router, status]); // routerが変更された時に再実行される
 

@@ -26,9 +26,9 @@ export default function Quiz() {
         // 読み込み中は何もしない
         if (status === "loading") return;
 
-        // ログインしていない場合、サインアップ画面にリダイレクト
+        // ログインしていない場合、ログイン画面にリダイレクト
         if (!session) {
-            router.push("/signup");
+            router.push("/login");
         }
     }, [session, status, router]);
 
