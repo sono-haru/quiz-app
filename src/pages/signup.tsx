@@ -67,39 +67,39 @@ export default function SignUp() {
 
     return (
         <div className="min-h-screen bg-cover bg-center flex items-center justify-center font-kaisei" style={{ backgroundImage: "url(/signup-img.jpg)" }}>
-            <form className="bg-[#D9D9D9] bg-opacity-40 p-6 rounded border border-white w-[350px] h-[600px] overflow-y-auto backdrop-blur-sm" onSubmit={handleSubmit(onSubmit)}>
-                <h1 className="text-[35px] text-center">Sign Up</h1>
+            <form className="bg-[#D9D9D9] bg-opacity-40 p-6 rounded-xl border border-white w-[350px] h-[600px] overflow-y-auto backdrop-blur-sm short:w-[300px] short:h-[500px]" onSubmit={handleSubmit(onSubmit)}>
+                <h1 className="text-[35px] text-center short:text-3xl">Sign Up</h1>
 
                 {Object.keys(schemaLabels).map((key) => (
                     <div key={key}>
-                        <label htmlFor={key} className="block mt-4 font-semibold text-white">
+                        <label htmlFor={key} className="block mt-4 font-semibold text-white short:text-sm">
                             {schemaLabels[key as keyof Schema]}
                         </label>
                         <input
                             type={schemaInputTypes[key as keyof Schema]}
-                            className="rounded-md bg-[#FFFFFF] text-gray-700 w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1]"
+                            className="rounded-md bg-[#FFFFFF] text-gray-700 w-full h-[55px] px-4 mt-2 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-[#4AA6D1] short:text-sm short:placeholder:text-[12px] short:h-[45px]"
                             placeholder={`${schemaLabels[key as keyof Schema]}を入力`}
                             {...register(key as keyof Schema)}
                         />
-                        {errors[key as keyof Schema] ? <p className="text-red-500 text-sm">{errors[key as keyof Schema]?.message}</p> : null}
+                        {errors[key as keyof Schema] ? <p className="text-red-500 text-sm ">{errors[key as keyof Schema]?.message}</p> : null}
                     </div>
                 ))}
 
                 <div className="flex flex-col items-center">
                     {/* 登録ボタン */}
-                    <button type="submit" className="w-[150px] block mt-[40px]">
+                    <button type="submit" className="w-[150px] flex justify-center mt-[40px] short:mt-7">
                         <Image
                             src="/signup-button.jpg"
                             alt="登録ボタン"
                             width={150}
                             height={50}
-                            className="drop-shadow-lg rounded-lg border-2 border-white transition-all duration-200 ease-in active:scale-[0.98]"
+                            className="drop-shadow-lg rounded-lg border-2 border-white transition-all duration-200 ease-in active:scale-[0.98] short:w-[110px]"
                         />
                     </button>
 
                     {/* ログインリンク */}
-                    <div className="flex items-center justify-center rounded-lg border-2 border-white bg-[#D9D9D9] opacity-[0.8] w-[185px] h-[35px] mt-[30px]">
-                        <Link href="/login" className="drop-shadow-lg text-center text-[16px]">
+                    <div className="flex items-center justify-center rounded-lg border-2 border-white bg-[#D9D9D9] opacity-[0.8] w-[185px] h-[35px] mt-[30px] short:mt-7 short:w-[160px]">
+                        <Link href="/login" className="drop-shadow-lg text-center text-[16px] short:text-[12px]">
                             登録済みの方はこちら
                         </Link>
                     </div>

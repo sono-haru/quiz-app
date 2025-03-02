@@ -10,7 +10,7 @@ export const TabMenu = () => {
                     alt="ホームボタン"
                     width={70}
                     height={70}
-                    className="mb-[6px] transition-all duration-200 ease-in active:scale-[0.98]" />
+                    className="mb-[6px] transition-all duration-200 ease-in active:scale-[0.98] short:w-[65px]" />
             </Link>
 
             <Link href="/ranking">
@@ -19,7 +19,7 @@ export const TabMenu = () => {
                     alt="ランキングボタン"
                     width={70}
                     height={70}
-                    className="mb-[10px] transition-all duration-200 ease-in active:scale-[0.98]" />
+                    className="mb-[8px] transition-all duration-200 ease-in active:scale-[0.98] short:w-[65px]" />
             </Link>
 
             <Link href="/etc">
@@ -28,7 +28,7 @@ export const TabMenu = () => {
                     alt="etcボタン"
                     width={70}
                     height={70}
-                    className="mb-[6px] transition-all duration-200 ease-in active:scale-[0.98]" />
+                    className="mb-[6px] transition-all duration-200 ease-in active:scale-[0.98] short:w-[65px]" />
             </Link>
         </div>
     )

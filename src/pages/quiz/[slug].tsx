@@ -140,38 +140,44 @@ export default function Quiz() {
             <div className="flex flex-col h-full">
                 {/* 問題文エリア */}
                 <div className="mx-8 mt-8 mb-4 h-[270px] bg-white rounded-2xl flex flex-col items-center justify-between p-6 text-xl text-center font-semibold border-2 border-[#DBC895]">
-    {/* 問題番号 + 画像の配置 */}
-    <div className="relative w-full flex justify-center items-center">
-        <p className="font-kaisei text-[30px] pb-2 border-b-2 border-dashed border-black">
-            {`Q. ${currentIndex + 1}`}
-        </p>
-        <Image
-            src="/cat.png"
-            width={60}
-            height={60}
-            alt="猫画像"
-            className="absolute left-0 rounded-2xl ml-5 mt-10"
-        />
+                {/* 問題番号 + 画像の配置 */}
+                <div className="relative w-full flex justify-center items-center">
+                    <p className="font-kaisei text-[30px] short:text-[20px] pb-2 border-b-2 border-dashed border-black">
+                        {`Q. ${currentIndex + 1}`}
+                    </p>
 
-            </div>
-            {/* 質問内容の表示 */}
-            <div className="relative flex-grow flex items-center justify-center">
-                <span>{questions[currentIndex].question}</span>
-            </div>
-        </div>
+                    <Image
+                        src="/cat.png"
+                        width={60}
+                        height={60}
+                        alt="猫画像"
+                        className="absolute left-0 rounded-2xl ml-5 mt-10 short:mb-10"
+                    />
+
+                        </div>
+                        {/* 質問内容の表示 */}
+                        <div className="relative flex-grow flex items-center justify-center short:text-[15px]">
+                            <span>{questions[currentIndex].question}</span>
+                        </div>
+                    </div>
 
 
                 {!answered ? (
                     // 回答前は解答ボタンを表示
                     <div className="flex justify-around mt-20">
                         <button className="relative" onClick={() => handleAnswer(true)}>
-                            <Image src="/true-button.svg" width={110} height={110} alt="マルボタン" className="rounded-2xl" />
+                            <Image
+                                src="/true-button.svg"
+                                width={110} height={110}
+                                alt="マルボタン"
+                                className="rounded-2xl short:w-[80px] short:h-[80px] short:mb-4"
+                            />
                             <Image
                                 src="/dinosaur2.png"
                                 width={65}
                                 height={65}
                                 alt="トリケラ画像"
-                                className="absolute rounded-2xl -top-6 rotate-[-20deg]"
+                                className="absolute rounded-2xl -top-6 rotate-[-24deg] short:-top-8 short:right-6 "
                             />
                         </button>
                         <button className="relative" onClick={() => handleAnswer(false)}>
@@ -180,19 +186,25 @@ export default function Quiz() {
                                 width={70}
                                 height={70}
                                 alt="犬画像"
-                                className="absolute rounded-2xl bottom-20"
+                                className="absolute rounded-2xl bottom-20 short:-top-10"
                             />
-                            <Image src="/false-button.svg" width={110} height={110} alt="バツボタン" className="rounded-2xl" />
+                            <Image
+                                src="/false-button.svg"
+                                width={110}
+                                height={110}
+                                alt="バツボタン"
+                                className="rounded-2xl short:w-[80px] short:h-[80px] short:mb-4"
+                            />
                         </button>
                     </div>
                 ) : (
                     // 回答済みの場合はフィードバックと次の問題へのボタンを表示
                     <div className="flex flex-col items-center max-w-full px-10">
                         {isCorrect ? (
-                            <p className="text-center text-xl font-bold text-red-400">正解！🎉</p>
+                            <p className="text-center text-xl font-bold text-red-400 short:text-[14px]">正解！🎉</p>
                         ) : (
                             <div className="text-center">
-                                <p className="text-lg font-bold text-blue-500">不正解...</p>
+                                <p className="text-lg font-bold text-blue-500 text-[14px] short:-my-2">不正解...</p>
                                 {/* 不正解の場合、JSONファイルの correctAnswer を表示 */}
                                 {!!questions[currentIndex].correctAnswer && (
                                     <div className="relative bg-gray-200 p-4 rounded-md mt-2 border-2 border-blue-200">
@@ -203,13 +215,15 @@ export default function Quiz() {
                                             alt="恐竜画像"
                                             className="absolute right-0 -top-8 rounded-2xl"
                                         />
-                                        <p className="text-md mt-2">{questions[currentIndex].correctAnswer}</p>
+                                        <p className="text-md mt-2 short:text-[12px]">{questions[currentIndex].correctAnswer}</p>
                                     </div>
                                 )}
                             </div>
 
                         )}
-                        <button onClick={handleNextQuestion} className="drop-shadow-lg mt-5 bg-blue-400 px-10 rounded-md text-white text-lg pt-2.5 pb-2.5">
+                        <button
+                            onClick={handleNextQuestion}
+                            className="drop-shadow-lg mt-5 bg-blue-400 px-10 rounded-md text-white text-lg pt-2.5 pb-2.5 short:text-[12px] short:pt-1 short:pb-1 short:mb-4">
                             次の問題へ
                         </button>
                     </div>

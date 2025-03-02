@@ -15,6 +15,11 @@ export default {
             fontFamily: {
                 kaisei: ["Kaisei Decol", "serif"],
             },
+            screens: {
+                // 画面の高さが836px以下の場合に適用される
+                short: { raw: "(max-height: 800px)" },
+                short2: { raw: "(max-height: 900px)" },
+            },
         },
     },
     plugins: [],

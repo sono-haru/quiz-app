@@ -40,20 +40,20 @@ export default function Ranking() {
 
   return (
     <Layout headerImgSrc="/ranking-header.jpg">
-      <div className="max-w-full px-12 py-10">
-        <div className="bg-white h-[60px] font-kaisei flex justify-evenly gap-3 rounded-lg border-2 border-[#B5D7D3]">
-          <p className="mt-4 flex-1 text-end">現在の順位は</p>
-          <p className={`text-[28px] mt-1 ${getCurrentRankColor(currentRank)}`}>
+      <div className="max-w-full px-12 py-10 short:px-16">
+        <div className="bg-white h-[60px] font-kaisei flex justify-evenly gap-3 rounded-lg border-2 border-[#B5D7D3] short:h-[45px] short:-mt-4">
+          <p className="mt-4 flex-1 text-end short:text-sm short:mt-3">現在の順位は</p>
+          <p className={`text-[28px] mt-1 short:-mt-[2px] ${getCurrentRankColor(currentRank)}`}>
             {currentRank !== null ? currentRank : "-"}
           </p>
 
-          <p className="mt-4 flex-1 text-start">位です
+          <p className="mt-4 flex-1 text-start short:text-sm short:mt-3">位です
             <span className="ml-2 inline-block rotate-[4deg]">! !</span>
             </p>
 
         </div>
 
-        <ul className="flex mt-10 bg-[#A7DDB6] h-[40px] border-b-4 border-[#92D1E7] rounded-t-lg justify-around opacity-[80%]">
+        <ul className="flex mt-10 bg-[#A7DDB6] h-[40px] border-b-4 border-[#92D1E7] rounded-t-lg justify-around opacity-[80%] short:mt-5">
           <li className="text-white font-bold font-kaisei text-lg mt-1">順位</li>
           <li className="text-white font-bold font-kaisei text-lg mt-1">名前</li>
           <li className="text-white font-bold font-kaisei text-lg mt-1">スコア</li>
@@ -61,7 +61,7 @@ export default function Ranking() {
 
         <div
           className="max-h-[350px] overflow-y-auto border-b-2 border-x-2 border-[#D3CDCC] rounded-b-lg"
-          style={{ height: rankings.length * 50 > 350 ? "350px" : `${rankings.length * 50}px` }}
+          style={{ height: rankings.length * 50 > 350 ? "350px" :`${rankings.length * 50}px` }}
         >
           {rankings.map((item, index) => (
             <div
