@@ -89,7 +89,7 @@ export default function Etc() {
                     </a>
                 </div>
 
-                <p className="text-center text-md font-kaisei short:text-sm short:-mt-5">© 2025 QuizApp</p>
+                <p className="text-center text-md font-kaisei short:text-sm short:-mt-5">© 2025 SonoQuiz</p>
 
             </div>
 

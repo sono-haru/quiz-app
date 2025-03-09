@@ -35,7 +35,7 @@ export default function Quiz() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [answered, setAnswered] = useState(false);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-    const [userAnswer, setUserAnswer] = useState<boolean | null>(null);
+    const [_userAnswer, setUserAnswer] = useState<boolean | null>(null);
     const [score, setScore] = useState(0);
 
     useEffect(() => {
