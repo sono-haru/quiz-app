@@ -73,7 +73,7 @@ export default function Etc() {
 
                 <div className="mb-7">
                     <a
-                        href="https://www.o-hara.ac.jp/senmon/school/mito_it/?"
+                        href="https://x.com/mito_infotec"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block"

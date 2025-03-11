@@ -22,12 +22,7 @@
 }
 
 body {
-  color: var(--foreground);
+color: #242424 !important;
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
-
-header {
-  aspect-ratio: 10 / 3;
-}
-
