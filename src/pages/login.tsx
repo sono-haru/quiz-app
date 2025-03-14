@@ -84,14 +84,14 @@ export default function LogIn() {
                 />
 
                 {/* エラーメッセージ */}
-                {error ? <p className="text-red-500 mt-2">{error}</p> : null}
+                {error ? <p className="text-red-500 mt-2 -mb-5 text-[12px]">{error}</p> : null}
 
-                <div className="flex flex-col items-center ">
+                <div className="flex flex-col items-center">
                     <button type="submit" className="flex justify-center w-[150px] mt-[40px] short:mt-7">
                         <img
                             src="/login-button.jpg"
                             alt="ログインボタン"
-                            className="w-[150px] rounded-lg border-2 border-white transition-all duration-200 ease-in active:scale-[0.98] drop-shadow-lg short:w-[120px]"
+                            className="w-[150px] rounded-lg border-2 border-white transition-all duration-800 ease-in active:scale-[0.9] drop-shadow-lg short:w-[120px]"
                         />
                     </button>
 

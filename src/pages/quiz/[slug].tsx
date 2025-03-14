@@ -128,7 +128,6 @@ export default function Quiz() {
             setIsCorrect(null);
             setUserAnswer(null);
         } else {
-            alert("クイズ終了！お疲れさまでした 🎉");
             router.push(`/score?score=${score}&headerImgSrc=/${slug}.jpg`);
         }
     };

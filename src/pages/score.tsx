@@ -44,11 +44,9 @@ export default function Score() {
                     </div>
                 )}
                 <div className="mx-6 mt-6">
-                    <p className="text-sm">
-                        当アプリをご利用いただきありがとうございました!
-                    </p>
+
                     <p className="text-sm mt-2">
-                        ほかの問題にも是非チャレンジしてみてください!
+                        ほかの問題にも是非チャレンジしてみてください !!
                     </p>
                 </div>
                 <button

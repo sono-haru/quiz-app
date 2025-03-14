@@ -37,7 +37,7 @@ export default function TermsOfService(){
                     </div>
                 </div>
                 <div className="text-center mt-10 drop-shadow-lg short:mt-7">
-                    <Link href="/etc" className="bg-blue-400 px-10 rounded-md text-white text-xl py-2.5 short:py-1 short:text-sm short:px-6 short2:text-sm short2:px-9">
+                    <Link href="/etc" className="bg-blue-400 px-10 rounded-md text-white text-xl py-2.5 short:py-1 short:text-sm short:px-6 short2:text-sm short2:px-9 short2:py-2">
                     戻る
                     </Link>
                 </div>
