@@ -15,6 +15,9 @@ export const Layout = ({ children, headerImgSrc, noHeader }: Props) => {
         <div className="relative flex flex-col h-screen max-w-auto">
             <Head>
                 <link rel="icon" href="/quiz-icon.svg" />
+                <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+                <link rel="manifest" href="/manifest.json" />
+                <meta name="theme-color" content="#ffffff" />
                 <title>SonoQuiz</title>
             </Head>
             {noHeader || !headerImgSrc || (
