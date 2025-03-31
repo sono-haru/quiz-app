@@ -3,5 +3,6 @@ export const Modal = ({ score }: any) => {
       <div className="max-w-full px-20 rounded-lg">
         <p>あなたの点数は{score}</p>
       </div>
+
     )
   }

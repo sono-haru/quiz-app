@@ -5,7 +5,7 @@ import { z } from "zod";
 
 const userSchema = z.object({
     username: z.string().min(3, "ユーザー名は3文字以上にしてください"),
-    password: z.string().min(6, "パスワードは6文字以上にしてください"),
+    password: z.string().min(4, "パスワードは4文字以上にしてください"),
 });
 
 export const POST = async (req: Request) => {
