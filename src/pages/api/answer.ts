@@ -13,7 +13,6 @@ export default async function handler(
       questionId: string;
       correct: boolean; // 回答が正解かどうか
     };
-
     const { userId, username, questionId, correct }: AnswerRequestBody = req.body;
 
     // 正解でない場合は何もせずに成功レスポンスを返す（または必要に応じた処理）

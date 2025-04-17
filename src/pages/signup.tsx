@@ -6,7 +6,7 @@ import * as z from "zod";
 import { useRouter } from "next/router";
 
 const schema = z.object({
-    username: z.string().min(3, "ユーザーネームは3文字以上必要です"),
+    username: z.string().min(1, "ユーザーネームは1文字以上必要です"),
     password: z.string().min(4, "パスワードは4文字以上必要です"),
     passwordConfirmation: z.string().min(1, "パスワードを再入力してください")
 }).superRefine((data, ctx) => {

@@ -4,7 +4,7 @@
       "level": 1,
       "items": [
           {
-              "question": "mragin-leftを5px指定すると要素は左方向に5px移動する。",
+              "question": "margin-leftを5px指定すると要素は左方向に5px移動する。",
               "answer": false,
               "correctAnswer": "margin-leftを5px指定すると、要素は右方向に5px移動します。"
           },
