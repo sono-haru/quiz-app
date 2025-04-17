@@ -24,8 +24,8 @@ type Schema = z.infer<typeof schema>;
 
 // フォームのラベルと入力タイプを定義（mapで回せるように）
 const schemaLabels: { [K in keyof Schema]: string } = {
-    username: "ユーザーネーム",
-    password: "パスワード",
+    username: "ユーザーネーム(1文字以上)",
+    password: "パスワード(4文字以上)",
     passwordConfirmation: "パスワード（再入力）"
 }
 const schemaInputTypes: { [K in keyof Schema]: string } = {
