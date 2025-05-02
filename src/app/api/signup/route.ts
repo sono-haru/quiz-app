@@ -4,8 +4,11 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 
 const userSchema = z.object({
-    username: z.string().min(1, "ユーザー名は1文字以上にしてください"),
-    password: z.string().min(4, "パスワードは4文字以上にしてください"),
+    username: z
+        .string()
+        .min(1, "1文字以上必要です")
+        .max(20, "20文字以内で入力してください"),
+    password: z.string().min(4, "4文字以上にしてください"),
 });
 
 export const POST = async (req: Request) => {

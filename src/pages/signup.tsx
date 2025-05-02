@@ -6,8 +6,11 @@ import * as z from "zod";
 import { useRouter } from "next/router";
 
 const schema = z.object({
-    username: z.string().min(1, "ユーザーネームは1文字以上必要です"),
-    password: z.string().min(4, "パスワードは4文字以上必要です"),
+    username: z
+        .string()
+        .min(1, "1文字以上必要です")
+        .max(20, "20文字以内で入力してください"),
+    password: z.string().min(4, "4文字以上必要です"),
     passwordConfirmation: z.string().min(1, "パスワードを再入力してください")
 }).superRefine((data, ctx) => {
     // パスワードとパスワード（再入力）が一致しているか確認
@@ -24,7 +27,7 @@ type Schema = z.infer<typeof schema>;
 
 // フォームのラベルと入力タイプを定義（mapで回せるように）
 const schemaLabels: { [K in keyof Schema]: string } = {
-    username: "ユーザーネーム(1文字以上)",
+    username: "ユーザーネーム(1~20文字以内)",
     password: "パスワード(4文字以上)",
     passwordConfirmation: "パスワード（再入力）"
 }
